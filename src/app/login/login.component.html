@@ -1,0 +1,25 @@
+<div class="container" id="main-container">
+   <div style="text-align: center;border: 3px solid green;">
+      <h1 style="background-color:antiquewhite;padding:15px;width:auto;font-size:medium">Login</h1>
+      <br>
+
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="d-flex justify-content-center">
+         <table border="1" cellpadding="10" style="background-color:aliceblue;">
+            <tr>
+               <td>Username:</td>
+               <td><input type='text' ngModel name='username' id="username"></td>
+            </tr>
+            <tr>
+               <td>Password:</td>
+               <td><input type='password' ngModel name='password' id="password" /></td>
+            </tr>
+            <tr>
+               <td><input class="btn btn-primary" name="submit" type="submit" value="Login" /></td>
+            </tr>
+         </table>
+      </form>
+<br><br>
+      
+     
+   </div>
+</div>
