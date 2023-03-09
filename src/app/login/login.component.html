@@ -1,3 +1,4 @@
+
 <div class="container" id="main-container">
    <div style="text-align: center;border: 3px solid green;">
       <h1 style="background-color:antiquewhite;padding:15px;width:auto;font-size:medium">Login</h1>
@@ -7,19 +8,69 @@
          <table border="1" cellpadding="10" style="background-color:aliceblue;">
             <tr>
                <td>Username:</td>
-               <td><input type='text' ngModel name='username' id="username"></td>
+               <td><input type='text | mobile' ngModel name='username' id="username"></td>
             </tr>
             <tr>
                <td>Password:</td>
-               <td><input type='password' ngModel name='password' id="password" /></td>
+               <td >
+                  
+                  <input [type]="fieldTextType ? 'text' : 'password'" ngModel name='password' id="password" />
+                   <i style="color:black;" class="fa" [ngClass]="{'fa-eye-slash':!fieldTextType,'fa-eye':fieldTextType }" 
+                   (mouseenter)="toggleFieldTextType()" (mouseleave)="toggleFieldTextType()"></i>
+                 
+               </td>
             </tr>
             <tr>
                <td><input class="btn btn-primary" name="submit" type="submit" value="Login" /></td>
             </tr>
          </table>
       </form>
-<br><br>
-      
-     
+      <div  class="d-flex justify-content-center">
+         <a (click)="onOpenModal(null, 'add')">New User ? SignIn</a>
+      </div>
+      <br>
+      <!-- <div  class="d-flex justify-content-center">
+         <a href="/oauth2/authorization/google">Use Google to SignIn</a>
+      </div><br> -->
    </div>
 </div>
+
+
+ <!-- Add Employee Modal -->
+ <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="addEmployeeModalLabel">User Registration</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #addForm="ngForm" (ngSubmit)="onAddEmployee(addForm)">
+           <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name" required>
+           </div>
+           <div class="form-group">
+              <label for="mobile">Mobile</label>
+              <input type="mobile" ngModel name="mobile" class="form-control" id="mobile" placeholder="Mobile" required>
+           </div>
+           <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" ngModel name="username" class="form-control" id="username" placeholder="Username" required>
+           </div>
+         <div class="form-group">
+            <label for="password">Password</label>
+            <input [type]="fieldTextType ? 'text' : 'password'" ngModel name="password" class="form-control" id="password" placeholder="Password" required>
+            <i style="color:black" class="fa" [ngClass]="{'fa-eye-slash':!fieldTextType,'fa-eye':fieldTextType }" (mouseenter)="toggleFieldTextType()" (mouseleave)="toggleFieldTextType()"></i>
+         </div>
+           <div class="modal-footer">
+              <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Back</button>
+              <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Register</button>
+           </div>
+           </form>
+        </div>
+     </div>
+   </div>
+   </div>

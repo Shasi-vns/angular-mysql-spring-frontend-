@@ -8,7 +8,13 @@
    <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav mr-auto">
          <li class="nav-item active">
-            <a class="title" style="color:white" *ngIf="isLoggedIn()"> Hello {{empName}}<span class="sr-only">(current)</span></a>
+            <a class="title" style="color:white" *ngIf="isLoggedIn()"> Hello {{userName}}<span class="sr-only">(current)</span></a>
+         </li>
+         <li class="nav-item active ms-3">
+            <a class="title" style="color:white" *ngIf="isLoggedIn() && userRole === 'ADMIN'" routerLink="/main">  Employee</a>
+         </li>
+         <li class="nav-item active ms-3">
+            <a class="title" style="color:white" *ngIf="isLoggedIn() && userRole === 'ADMIN'" routerLink="/userpage">  User</a>
          </li>
 
       </ul>
