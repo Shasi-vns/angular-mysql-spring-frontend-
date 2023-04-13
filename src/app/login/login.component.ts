@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { OauthUserServiceService } from '../OauthService/oauth-user-service.service';
+
 
 import { User } from '../User_services/User';
 import { UserServiceService } from '../User_services/user-service.service';
@@ -17,14 +17,16 @@ import { UserService } from '../_services/user.service';
 })
 export class LoginComponent implements OnInit {
   public fieldTextType: boolean = false;
+  public userName: string = "Shasi";
+  
 
   constructor(
     private toastr: ToastrService,
     private userService:UserService,
-    private router: Router, 
+    private router: Router,
     private userAuthSer:UserAuthService,
     private userSerReg:UserServiceService,
-    private OauthSer:OauthUserServiceService
+
     ) { }
 
   ngOnInit(): void {
@@ -42,6 +44,7 @@ this.userService.login(loginForm.value).subscribe(
     this.userAuthSer.setRole(response.user.role);
     this.userAuthSer.setToken(response.jwtToken);
     this.userAuthSer.setName(response.user.name);
+    this.userAuthSer.setLastLogin(response.user.loginDate);
     this.router.navigate(["/main"]);
   },
   error:(error:HttpErrorResponse)=> {
@@ -63,10 +66,6 @@ public onAddEmployee(addForm: NgForm):void{
 });
 }
 
-public Oauth(){
-  this.router.navigateByUrl('/oauth2/authorization/google')
-  this.OauthSer.Oauth();
-}
 
 public toggleFieldTextType() {
   this.fieldTextType = !this.fieldTextType;

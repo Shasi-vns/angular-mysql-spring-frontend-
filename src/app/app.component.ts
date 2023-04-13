@@ -18,6 +18,9 @@ export class AppComponent implements OnInit {
   // public deleteEmployee:Employee | any;
    public userName : string | any;
    public userRole: string|any;
+   public lastlogindate: string|any;
+   
+   
 
 constructor (private employeeService: EmployeeService,
   private userAuthSer: UserAuthService,
@@ -30,6 +33,7 @@ constructor (private employeeService: EmployeeService,
      //this.getEmployees();
      this.userName=this.userAuthSer.getName();
      this.userRole=this.userAuthSer.getRole();
+     this.lastlogindate=this.userAuthSer.getLastLogin();
 
   }
 
@@ -71,7 +75,7 @@ constructor (private employeeService: EmployeeService,
 //   }
 
 //   public onDeleteEmployee(employeeId: number):void{
-   
+
 //     this.employeeService.deleteEmployee(employeeId).subscribe(
 //      {next: (response:void)=> this.getEmployees(),
 //       error: (error:HttpErrorResponse)=>alert(error.message),

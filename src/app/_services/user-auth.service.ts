@@ -11,6 +11,14 @@ export class UserAuthService {
     localStorage.setItem("role",role);
   }
 
+  public setLastLogin(loginDate:string){
+  localStorage.setItem("LastLoginDate",loginDate)
+  }
+
+  public getLastLogin():any{
+    return localStorage.getItem("LastLoginDate")
+    }
+
   public setName(name:string){
     localStorage.setItem("name",name);
   }
