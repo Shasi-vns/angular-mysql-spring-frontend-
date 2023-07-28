@@ -20,4 +20,9 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it("testing username",()=>{
+    expect(component.userName).toBe("Shasi");
+  });
+
 });

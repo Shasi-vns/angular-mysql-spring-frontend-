@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 import { UserAuthService } from './_services/user-auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -15,17 +16,24 @@ export class AppComponent implements OnInit {
   //public employee: Employee[] = [];
   // public editEmployee:Employee | any;
   // public deleteEmployee:Employee | any;
-   public empName : string | any;
+   public userName : string | any;
+   public userRole: string|any;
+   public lastlogindate: string|any;
+   
+   
 
 constructor (private employeeService: EmployeeService,
   private userAuthSer: UserAuthService,
-  private router: Router
+  private router: Router,
+  private toastr: ToastrService
   ){}
 
 
   ngOnInit(){
      //this.getEmployees();
-     this.empName=this.userAuthSer.getName();
+     this.userName=this.userAuthSer.getName();
+     this.userRole=this.userAuthSer.getRole();
+     this.lastlogindate=this.userAuthSer.getLastLogin();
 
   }
 
@@ -35,7 +43,9 @@ constructor (private employeeService: EmployeeService,
 
   public LogOut(){
     this.userAuthSer.clear();
+
     this.router.navigate(["/login"]);
+    this.toastr.success('You have been Logged Out Successfully','LogOut',{timeOut: 3000})
   }
 
 // public getEmployees():void{
@@ -65,7 +75,7 @@ constructor (private employeeService: EmployeeService,
 //   }
 
 //   public onDeleteEmployee(employeeId: number):void{
-   
+
 //     this.employeeService.deleteEmployee(employeeId).subscribe(
 //      {next: (response:void)=> this.getEmployees(),
 //       error: (error:HttpErrorResponse)=>alert(error.message),
