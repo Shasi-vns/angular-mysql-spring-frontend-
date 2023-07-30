@@ -47,6 +47,15 @@ export class MainComponent implements OnInit {
     });
   }
 
+  public editEmployeeById(Id:number){
+    this.employeeService.getEmployeeById(Id).subscribe({
+    next:(response:Employee)=>{
+    (this.editEmployee=response),console.log(response);
+    },
+    error:(error:HttpErrorResponse)=>alert(error.message),
+    });
+    }
+
   public onAddEmployee(addForm: NgForm): void {
     document.getElementById('add-employee-form')?.click();
     this.employeeService.addEmployee(addForm.value).subscribe({
@@ -115,7 +124,8 @@ export class MainComponent implements OnInit {
     }
   }
 
-  public onOpenModal(employee: Employee | any, mode: any): void {
+
+  public onOpenModal(employee: Employee | number | any, mode: any): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
@@ -126,7 +136,7 @@ export class MainComponent implements OnInit {
     }
     if (mode === 'edit') {
       if (this.userAuthSer.getRole() === 'ADMIN') {
-        this.editEmployee = employee;
+        this.editEmployeeById(employee);
         button.setAttribute('data-target', '#updateEmployeeModal');
       } else {
         this.toastr.warning('You Dont have access', 'Updation', {
